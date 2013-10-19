@@ -587,7 +587,7 @@ function doMapBS(lat,lon){
   pointArray = new google.maps.MVCArray([]);
 
   // Set an initial set as the first 50
-  for(var i = 0;i<50;++i)
+  for(var i = 0;i<150;++i)
     pointArray.push(taxiData[i]);
   heatSlidePos = 0;
 
@@ -620,11 +620,11 @@ function heatSlide(){
     pointArray.removeAt(0);
     pointArray.removeAt(0);
     pointArray.removeAt(0);
-    pointArray.push(taxiData[(heatSlidePos++ + 50) % taxiData.length]);
-    pointArray.push(taxiData[(heatSlidePos++ + 50) % taxiData.length]);
-    pointArray.push(taxiData[(heatSlidePos++ + 50) % taxiData.length]);
-    pointArray.push(taxiData[(heatSlidePos++ + 50) % taxiData.length]);
-    pointArray.push(taxiData[(heatSlidePos++ + 50) % taxiData.length]);
+    pointArray.push(taxiData[(heatSlidePos++ + pointArray.length) % taxiData.length]);
+    pointArray.push(taxiData[(heatSlidePos++ + pointArray.length) % taxiData.length]);
+    pointArray.push(taxiData[(heatSlidePos++ + pointArray.length) % taxiData.length]);
+    pointArray.push(taxiData[(heatSlidePos++ + pointArray.length) % taxiData.length]);
+    pointArray.push(taxiData[(heatSlidePos++ + pointArray.length) % taxiData.length]);
     if(heatSlidePos >= taxiData.length)
       heatSlidePos = 0;
     setTimeout(heatSlide, 120);
