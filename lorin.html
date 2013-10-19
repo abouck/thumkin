@@ -620,11 +620,11 @@ function heatSlide(){
     pointArray.removeAt(0);
     pointArray.removeAt(0);
     pointArray.removeAt(0);
-    pointArray.push(taxiData[(heatSlidePos++ + 50) % 200]);
-    pointArray.push(taxiData[(heatSlidePos++ + 50) % 200]);
-    pointArray.push(taxiData[(heatSlidePos++ + 50) % 200]);
-    pointArray.push(taxiData[(heatSlidePos++ + 50) % 200]);
-    pointArray.push(taxiData[(heatSlidePos++ + 50) % 200]);
+    pointArray.push(taxiData[(heatSlidePos++ + 50) % taxiData.length]);
+    pointArray.push(taxiData[(heatSlidePos++ + 50) % taxiData.length]);
+    pointArray.push(taxiData[(heatSlidePos++ + 50) % taxiData.length]);
+    pointArray.push(taxiData[(heatSlidePos++ + 50) % taxiData.length]);
+    pointArray.push(taxiData[(heatSlidePos++ + 50) % taxiData.length]);
     if(heatSlidePos >= taxiData.length)
       heatSlidePos = 0;
     setTimeout(heatSlide, 120);
