@@ -20,10 +20,6 @@ google.maps.event.addDomListener(window, 'load', initialize);
 // }
 
 
-heatmap.setOptions({
-    gradient: ['rgba(122,122,122,0)','rgba(84,84,84,0.5)', 'rgba(255,255,255,1)']
-  })
-
 function changeRadius() {
   heatmap.setOptions({radius: heatmap.get('radius') ? null : 20});
 }
@@ -109,7 +105,7 @@ function doMapBS(lat,lon){
   pointArray = new google.maps.MVCArray([]);
 
   // Set an initial set as the first 50
-  for(var i = 0;i<150;++i)
+  for(var i = 0;i<75;++i)
     pointArray.push(taxiData[i]);
   heatSlidePos = 0;
 
@@ -119,12 +115,20 @@ function doMapBS(lat,lon){
 
   heatmap.setOptions({
     gradient: [
-    'rgba(0,0,0,0)',
-    'rgba(17,17,17,1)',
-    'rgba(84,84,84,1)',
-    'rgba(160,160,160,1)',
-    'rgba(255,255,255,1)'],
-    radius: 5
+    'rgba(17,0,0,0)',
+    'rgba(84,0,0,1)',
+    'rgba(120,0,0,1)',
+    'rgba(160,0,0,1)',
+    'rgba(255,0,0,1)',
+    'rgba(255,0,0,1)',
+    'rgba(255,0,0,1)',
+    'rgba(255,0,0,1)',
+    'rgba(255,0,0,1)',
+    'rgba(255,0,0,1)',
+    'rgba(255,0,0,1)',
+    'rgba(255,0,0,1)'
+    ],
+    radius: 20
   });
 
   heatmap.setMap(map);
@@ -157,6 +161,7 @@ function heatSlide(){
     pointArray.push(taxiData[(heatSlidePos++ + pointArray.length) % taxiData.length]);
     pointArray.push(taxiData[(heatSlidePos++ + pointArray.length) % taxiData.length]);
     pointArray.push(taxiData[(heatSlidePos++ + pointArray.length) % taxiData.length]);
+    console.log(heatSlidePos + " " + pointArray.length);
     if (heatSlidePos >= taxiData.length)
       heatSlidePos = 0;
     setTimeout(heatSlide, 120);
