@@ -1,0 +1,76 @@
+body {
+	background: url('background.png') no-repeat center center fixed;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+/*
+.background_over {
+	background: url('both_blocks_textbox.png') no-repeat center center relative;
+	background-size: cover;
+	background-repeat: no-repeat;
+	opacity: 1;
+}
+*/
+
+.container {
+	min-width: 400px;
+  	min-height: 400px;
+  	width: 40%;
+  	height: 80%;
+	margin: 20% auto;
+	position: relative;
+	border: 1px solid black;
+	background-color: black;
+	opacity: 0.25;
+}
+
+#map {
+	min-width: 400px;
+  	min-height: 400px;
+  	width: 80%;
+  	height: 80%;
+	margin: 20% auto;
+	position: absolute;
+	top: 0px;
+	left: 10%;
+	border: 1px solid black;
+	display: none;
+}
+
+/*.container_2 {
+	min-width: 100px;
+  	min-height: 450px;
+  	width: 40%;
+  	height: 60%;
+	margin: 20% auto;
+	position: absolute;
+	top: 0px;
+	left: 30%;
+	
+}*/
+
+#plus {
+  	background: url('plus.png') no-repeat;
+  	background-size: 100%;
+	position: relative;
+	height: 200px;
+	width: 200px;
+	margin-left: 40%;
+}
+
+#minus {
+	background: url('minus.png') no-repeat;
+	background-size: 100%;
+	position: relative;
+	height: 200px;
+	width: 200px;
+	margin-top: 5%;
+	margin-left: 40%;
+	top: 45px;
+	bottom: 20%;
+}
+
+
+.clearfix {
+	clear: both;
+}
