@@ -15,7 +15,7 @@
 <script type="text/javascript">
 
 // OK now let's do a lil something
-var map, pointArray, heatmap, heatSlidePos;
+var map, pointArray, heatmap, heatSlidePos, firstClick;
 
 var coords = "";
 
@@ -605,7 +605,10 @@ function doMapBS(lat,lon){
   // coords += "new google.maps.LatLng("+(taxiData[i].lb - 0.05)+", " + (taxiData[i].mb - 0.05) + "),<br />";
   //   document.getElementById("messages").innerHTML = coords;
 
-    coords += "<br />" + event.latLng.lb + "," + event.latLng.mb + ","+new Date();
+  if(firstClick == null)
+    firstClick = new Date();
+
+    coords += "<br />" + event.latLng.lb + "," + event.latLng.mb + ","+parseInt(((new Date()).getTime() - firstClick.getTime())/100);
     document.getElementById("messages").innerHTML = coords;
   });
 
@@ -629,12 +632,14 @@ function heatSlide(){
       heatSlidePos = 0;
     setTimeout(heatSlide, 120);
 }
-</script>
+</script> 
 </head>
 
 <body>
 	<div id="map-canvas"></div>
   <input type="button" value="Cycle" onclick="startCycle();" />
   <div id="messages"></div>
+
+  <textarea id="testVals"></textarea>
 </body>
 </html>
