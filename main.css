@@ -4,6 +4,26 @@ body {
 	background-repeat: no-repeat;
 }
 
+header {
+	background: rgba(0,0,0,0.5);
+	text-align: center;
+	margin: 0 auto 20px;
+	color: white;
+	font-family: 'Helvetica', sans-serif;
+
+}
+
+header h1 {
+	margin: 0 auto;
+	font-size: 32px;
+	font-weight: bold;
+}
+
+header h3 {
+	margin: 0 auto;
+	font-size: 14px;
+}
+
 footer {
 	height: 50px;
 	width: 50px;
@@ -21,19 +41,30 @@ footer {
 }
 
 #map {
-	min-width: 400px;
-	min-height: 400px;
+	/*min-width: 400px;*/
+	/*min-height: 400px;*/
 	width: 80%;
 	height: 90%;
 /*	margin: 20% auto; */
-	margin-top:40px;
-	margin-bottom: 20%;
-
-	position: absolute;
+	/*margin-top:40px;*/
+	/*margin-bottom: 20%;*/
+	margin: 0 auto;
+	/*position: absolute;*/
 	top: 0px;
-	left: 10%;
+	/*left: 10%;*/
 	border: 5px solid black;
 	border-radius: 15px;
+}
+
+#clock {
+  position: absolute;
+  margin-left: 5%;
+  margin-top: 5%;
+  height: 75px;
+  width: 75px;
+  border: 3px solid white;
+  border-radius: 10px;
+  z-index: 10;
 }
 
 #plus {
@@ -44,6 +75,7 @@ footer {
 	width: 300px;
 	margin-left: 24%;
 	margin-top: 3%;
+	-webkit-filter: drop-shadow(3px 3px 3px darkblue);
 }
 
 #minus {
@@ -55,6 +87,7 @@ footer {
 	margin-top: 10%;
 	margin-left: 24%;
 	bottom: 20%;
+	-webkit-filter: drop-shadow(3px 3px 3px darkred);
 }
 
 @media screen and (device-aspect-ratio: 2/3) {

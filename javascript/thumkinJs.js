@@ -125,6 +125,7 @@ function doMapBS(lat,lon){
     var mapOptions = {
       zoom: 13,
       center: new google.maps.LatLng(lat, lon),
+      disableDefaultUI: true,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       styles: [
         {
@@ -162,6 +163,16 @@ function doMapBS(lat,lon){
           featureType: "road.highway",
           elementType: "geometry.fill",
           stylers: [{color: '#000000'}]
+        },
+        {
+          featureType: "transit.station.airport",
+          elementType: "geometry.fill",
+          stylers: [{color: '#110027'}]
+        },
+        {
+          featureType: "transit.station.airport",
+          elementType: "geometry.stroke",
+          stylers: [{color: '#444444'}]
         },
         {
           featureType: "water",
@@ -252,6 +263,35 @@ function doMapBS(lat,lon){
 
   heatmapUp.setMap(map);
   heatmapDown.setMap(map);
+
+  pointArray2 = new google.maps.MVCArray([]);
+
+  // Set an initial set as the first 50
+  for(var i = 0;i<75;++i)
+    pointArray2.push(taxiData[i+100]);
+    heatSlidePos = 0;
+
+  heatmap2 = new google.maps.visualization.HeatmapLayer({
+    data: pointArray
+  });
+
+  heatmap2.setOptions({
+    gradient: [
+    'rgba(0,0,0,0)',
+    'rgba(0,0,84,1)',
+    'rgba(0,0,120,1)',
+    'rgba(0,0,160,1)',
+    'rgba(0,0,255,1)',
+    'rgba(255,0,255,1)',
+    'rgba(255,0,255,1)',
+    'rgba(255,0,255,1)',
+    'rgba(255,0,255,1)',
+    'rgba(255,0,255,1)'
+    ],
+    radius: 20
+  });
+
+  heatmap2.setMap(map);
 
   // Make it clickable
   google.maps.event.addListener(map, 'click', function(event) {
