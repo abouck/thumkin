@@ -185,25 +185,31 @@ function doMapBS(lat,lon){
 
   // Set an initial set as the first 50
   for(var i = 0;i<75;++i)
-    pointArray2.push(taxiData[i+100]);
+    pointArray2.push(taxiData2[i]);
     heatSlidePos = 0;
 
   heatmap2 = new google.maps.visualization.HeatmapLayer({
-    data: pointArray
+    data: pointArray2
   });
 
   heatmap2.setOptions({
     gradient: [
-    'rgba(0,0,0,0)',
-    'rgba(0,0,84,1)',
-    'rgba(0,0,120,1)',
-    'rgba(0,0,160,1)',
-    'rgba(0,0,255,1)',
-    'rgba(255,0,255,1)',
-    'rgba(255,0,255,1)',
-    'rgba(255,0,255,1)',
-    'rgba(255,0,255,1)',
-    'rgba(255,0,255,1)'
+    'rgba(0,0,100,0)',
+    'rgba(30,150,0,1)',
+    'rgba(50,180,0,1)',
+    'rgba(50,200,0,1)',
+    'rgba(50,225,0,1)',
+    'rgba(50,255,0,1)',
+    'rgba(50,255,0,1)'
+    // 'rgba(50,50,100,0)',
+    // 'rgba(0,0,84,1)',
+    // 'rgba(0,0,120,1)',
+    // 'rgba(42,87,95,1)',
+    // 'rgba(0,0,160,1)',
+    // 'rgba(0,0,255,1)',
+    // 'rgba(0,0,255,1)',
+    // 'rgba(102,174,187,1)',
+    // 'rgba(102,174,187,1)'
     ],
     radius: 20
   });

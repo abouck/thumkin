@@ -1,5 +1,5 @@
 body {
-	background: url('background.png') no-repeat center center fixed;
+	background: url('assets/background.png') no-repeat center center fixed;
 	background-size: cover;
 	background-repeat: no-repeat;
 }
@@ -65,10 +65,11 @@ footer {
   border: 3px solid white;
   border-radius: 10px;
   z-index: 10;
+  background: rgba(255,255,255,0.5);
 }
 
 #plus {
-	background: url('plus.png') no-repeat;
+	background: url('assets/plus.png') no-repeat;
 	background-size: 100%;
 	position: relative;
 	height: 300px;
@@ -79,7 +80,7 @@ footer {
 }
 
 #minus {
-	background: url('minus.png') no-repeat;
+	background: url('assets/minus.png') no-repeat;
 	background-size: 100%;
 	position: relative;
 	height: 300px;
