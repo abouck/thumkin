@@ -1,4 +1,7 @@
-var taxiData = [
+var taxiData = [];
+
+/*
+ = [
 new google.maps.LatLng(33.994611584814606, -118.46360206604004),
 new google.maps.LatLng(33.98208625901939, -118.4300422668457),
 new google.maps.LatLng(33.98165922673721, -118.45733642578125),
@@ -373,15 +376,4 @@ new google.maps.LatLng(35.639441068973916, -86.7919921875),
 new google.maps.LatLng(34.004715899706596, -118.46334457397461)
   ];
 
-  testData =[]
-  var thumkinTest = new Firebase('https://thumkin.firebaseio.com');
-  thumkinTest.set(testData);
-  newArr = thumkinTest.child('testData')
-  newArr.push({testData: taxiData}, function(error){
-    if (error){
-      console.log("data not saved." + error);
-    } else {
-      console.log("data saved.");
-    }
-  });
-
+*/

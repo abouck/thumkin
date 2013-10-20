@@ -1,11 +1,18 @@
 //initialize Firebase
 var taxiData;
-var thumkinData = new Firebase('https://thumkin.firebaseio.com/testData');
-// taxiData = thumkinData.child('testData');
+var thumkinData = new Firebase('https://thumkin2.firebaseio.com');
 
-// thumkinData.push({"mb":-118.49082900000002,"lb":34.033206})
-
-console.log(thumkinData);
+var auth = new FirebaseSimpleLogin(thumkinData, function(error, user) {
+  if (error) {
+    // an error occurred while attempting login
+    console.log(error);
+  } else if (user) {
+    // user authenticated with Firebase
+    console.log('User ID: ' + user.id + ', Provider: ' + user.provider);
+  } else {
+    // user is logged out
+  }
+});
 
 // OK now let's do a lil something
 var map, pointArray, heatmap, heatSlidePos;
@@ -14,24 +21,40 @@ var coords = "";
 
 
 function initialize() {
-  // Try to find out where the hell we are
+  auth.login('anonymous');
+
+  thumkinData.on('value', haveThumkinData);
+}
+// Go ahead and load the above when the window is ready
+google.maps.event.addDomListener(window, 'load', initialize);
+
+function haveThumkinData(snapshot) {
+  taxiData = snapshot.val().testData["-J6IyUU_0mwX8TfSCPQQ"].testData;
+  for(var i in taxiData)
+    taxiData[i] = new google.maps.LatLng(taxiData[i].lb, taxiData[i].mb);
+
+  // OK, we've loaded all the existing data, so no more need to notify
+  thumkinData.off('value', haveThumkinData);
+  // But we do want to know about new rows being added by others
+  thumkinData.on('child_added', addedThumkinData);
+
+  // Next try to find out where the hell we are
   navigator.geolocation.getCurrentPosition(locSuccess, locError);
 }
-// Go ahead and load this when the window is ready
-google.maps.event.addDomListener(window, 'load', initialize);
+
+function addedThumkinData(newData){
+  console.log(newData);
+}
 
 // function toggleHeatmap() {
 //   heatmap.setMap(heatmap.getMap() ? null : map);
 // }
-
-
-function changeRadius() {
-  heatmap.setOptions({radius: heatmap.get('radius') ? null : 20});
-}
-
-function changeOpacity() {
-  heatmap.setOptions({opacity: heatmap.get('opacity') ? null : 0.2});
-}
+// function changeRadius() {
+//   heatmap.setOptions({radius: heatmap.get('radius') ? null : 20});
+// }
+// function changeOpacity() {
+//   heatmap.setOptions({opacity: heatmap.get('opacity') ? null : 0.2});
+// }
 
 function locSuccess(location) {
     doMapBS(location.coords.latitude, location.coords.longitude);
@@ -42,67 +65,76 @@ function locError(error) {
     doMapBS(34.0219, -118.4814);
 }
 
-
-
+// Get the map all set
 function doMapBS(lat,lon){
+
+  // newArr = thumkinData.child('testData')
+  // newArr.push({testData: taxiData}, function(error){
+  //   if (error){
+  //     console.log("data not saved." + error);
+  //   } else {
+  //     console.log("data saved.");
+  //   }
+  // });
+
     var mapOptions = {
-    zoom: 13,
-    center: new google.maps.LatLng(lat, lon),
-    mapTypeId: google.maps.MapTypeId.ROADMAP,
-    styles: [
-    {
-      featureType: "all",
-      stylers: [{invert_lightness: true}]
-    },
-    {
-      featureType: "landscape",
-      stylers: [{color: '#17031c'}]
-    },
-    {
-      featureType: "poi",
-      stylers: [{visibility: 'off'}]
-    },
-    {
-      featureType: "road.highway",
-      stylers: [{color: '#c0e0ff'}]
-    },
-    {
-      featureType: "road.highway",
-      elementType: "labels",
-      stylers: [{visibility: 'off'}]
-    },
-    {
-      featureType: "road",
-      elementType: "geometry.stroke",
-      stylers: [{color: '#545454'}]
-    },
-    {
-      featureType: "landscape.manmade",
-      elementType: "geometry.stroke",
-      stylers: [{color: '#545454'}]
-    },
-    {
-      featureType: "road.highway",
-      elementType: "geometry.fill",
-      stylers: [{color: '#000000'}]
-    },
-    {
-      featureType: "water",
-      elementType: "labels.text.fill",
-      stylers: [{color: '#ffffff'}]
-    },
-    {
-      featureType: "administrative",
-      elementType: "labels.text.fill",
-      stylers: [{color: '#ffffff'}]
-    },
-    {
-      featureType: "water",
-      elementType: "geometry",
-      stylers: [{color: '#032b30'}]
-    }
-  ]
-  };
+      zoom: 13,
+      center: new google.maps.LatLng(lat, lon),
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      styles: [
+        {
+          featureType: "all",
+          stylers: [{invert_lightness: true}]
+        },
+        {
+          featureType: "landscape",
+          stylers: [{color: '#17031c'}]
+        },
+        {
+          featureType: "poi",
+          stylers: [{visibility: 'off'}]
+        },
+        {
+          featureType: "road.highway",
+          stylers: [{color: '#c0e0ff'}]
+        },
+        {
+          featureType: "road.highway",
+          elementType: "labels",
+          stylers: [{visibility: 'off'}]
+        },
+        {
+          featureType: "road",
+          elementType: "geometry.stroke",
+          stylers: [{color: '#545454'}]
+        },
+        {
+          featureType: "landscape.manmade",
+          elementType: "geometry.stroke",
+          stylers: [{color: '#545454'}]
+        },
+        {
+          featureType: "road.highway",
+          elementType: "geometry.fill",
+          stylers: [{color: '#000000'}]
+        },
+        {
+          featureType: "water",
+          elementType: "labels.text.fill",
+          stylers: [{color: '#ffffff'}]
+        },
+        {
+          featureType: "administrative",
+          elementType: "labels.text.fill",
+          stylers: [{color: '#ffffff'}]
+        },
+        {
+          featureType: "water",
+          elementType: "geometry",
+          stylers: [{color: '#032b30'}]
+        }
+      ]
+    };
 
   map = new google.maps.Map(document.getElementById('map-canvas'),
       mapOptions);
@@ -166,7 +198,6 @@ function heatSlide(){
     pointArray.push(taxiData[(heatSlidePos++ + pointArray.length) % taxiData.length]);
     pointArray.push(taxiData[(heatSlidePos++ + pointArray.length) % taxiData.length]);
     pointArray.push(taxiData[(heatSlidePos++ + pointArray.length) % taxiData.length]);
-    console.log(heatSlidePos + " " + pointArray.length);
     if (heatSlidePos >= taxiData.length)
       heatSlidePos = 0;
     setTimeout(heatSlide, 120);
