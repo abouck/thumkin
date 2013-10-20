@@ -1,27 +1,49 @@
 <!DOCTYPE html>
+<html>
 <head>
-	<title>Thumbkin Clickable</title>
-<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<link rel="stylesheet" href="main.css">
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <style type="text/css">
       html { height: 100% }
       body { height: 100%; margin: 0; padding: 0 }
-      #map-canvas { height: 90% }
+      #map-canvas { height: 100% }
     </style>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=visualization&key=AIzaSyBxL9E6d7IAD4v-y9y2Bm1dN_4x6kBcPU8&sensor=false">
     </script>
     <script type='text/javascript' src='https://cdn.firebase.com/v0/firebase.js'></script>
-    <script type='text/javascript'
+         <script type='text/javascript'
         src='https://cdn.firebase.com/v0/firebase-simple-login.js'>
     </script>
-
-    <script type="text/javascript" src="javascript/testData.js"></script>
     <script type="text/javascript" src="javascript/thumkinJs.js"></script>
+    <script>
+      function thanksMod(){
+        document.getElementById("thanks").style.opacity = i;
+      }
+      function thanksIn() {
+        for(i=0; i <= 1.0; i += 0.1){
+          window.setTimeout(thanksMod, 600)
+        }
+        window.setTimeout(thanksOut, 1200);
+      }
+      function thanksOut() {
+        for(i=1; i>=0; i -= 0.1){   
+          window.setTimeout(thanksMod, 600)
+        }
+      }
+    </script>
 
 </head>
-
 <body>
-	<div id="map-canvas"></div>
-  <input type="button" value="Cycle" onclick="startCycle();" />
-  <div id="messages"></div>
+		<div class = "clearfix"></div>
+<div id="plus" onclick='thumb(true); thanksIn()'></div>
+<div id="minus" onclick='thumb(false); thanksIn()'></div>
+<div id='thanks'>thumkin</div>
+<div id="map">
+  <div id="clock"></div>
+	<div id="map-canvas">
+  </div>
+</div>
+
+
 </body>
-</html>
+<html>
