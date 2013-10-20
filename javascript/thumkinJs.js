@@ -2,6 +2,7 @@
 var taxiData=[];
 var thumkinData = new Firebase('https://thumkin2.firebaseio.com');
 
+
 var auth = new FirebaseSimpleLogin(thumkinData, function(error, user) {
   if (error) {
     // an error occurred while attempting login
