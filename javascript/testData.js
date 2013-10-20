@@ -500,3 +500,16 @@ var taxiData = [
   new google.maps.LatLng(34.002986, -118.45311199999996),
   new google.maps.LatLng(34.001266, -118.45335500000003)
   ];
+
+  testData =[]
+  var thumkinTest = new Firebase('https://thumkin.firebaseio.com');
+  thumkinTest.set(testData);
+  newArr = thumkinTest.child('testData')
+  newArr.push({testData: taxiData}, function(error){
+    if (error){
+      console.log("data not saved." + error);
+    } else {
+      console.log("data saved.");
+    }
+  });
+

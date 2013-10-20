@@ -1,6 +1,11 @@
 //initialize Firebase
-var thumkinData = new Firebase('https://thumkin.firebaseio.com/');
+var taxiData;
+var thumkinData = new Firebase('https://thumkin.firebaseio.com/testData');
+// taxiData = thumkinData.child('testData');
 
+// thumkinData.push({"mb":-118.49082900000002,"lb":34.033206})
+
+console.log(thumkinData);
 
 // OK now let's do a lil something
 var map, pointArray, heatmap, heatSlidePos;
