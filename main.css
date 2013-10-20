@@ -48,7 +48,7 @@ footer {
 /*	margin: 20% auto; */
 	/*margin-top:40px;*/
 	/*margin-bottom: 20%;*/
-	margin: 0 auto;
+	margin: 40px auto 20%;
 	/*position: absolute;*/
 	top: 0px;
 	/*left: 10%;*/
@@ -75,7 +75,7 @@ footer {
 	width: 300px;
 	margin-left: 24%;
 	margin-top: 3%;
-	-webkit-filter: drop-shadow(3px 3px 3px darkblue);
+	/*-webkit-filter: drop-shadow(3px 3px 3px darkblue);*/
 }
 
 #minus {
@@ -87,7 +87,7 @@ footer {
 	margin-top: 10%;
 	margin-left: 24%;
 	bottom: 20%;
-	-webkit-filter: drop-shadow(3px 3px 3px darkred);
+	/*-webkit-filter: drop-shadow(3px 3px 3px darkred);*/
 }
 
 @media screen and (device-aspect-ratio: 2/3) {
@@ -162,4 +162,19 @@ footer {
 }
 .clearfix {
 	clear: both;
+}
+
+#thanks {
+	position: absolute;
+	top: 30%;
+	width: 80%;
+	left: 10%;
+	margin: 0 auto;
+	z-index: 3;
+	background: rgba(0,0,0,0.6);
+	color: white;
+	font-size: 16px;
+	text-align: center;
+	padding: 10px;
+	opacity: 0;
 }

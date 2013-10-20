@@ -14,20 +14,31 @@
          <script type='text/javascript'
         src='https://cdn.firebase.com/v0/firebase-simple-login.js'>
     </script>
-    <script type="text/javascript" src="javascript/testData.js"></script>
     <script type="text/javascript" src="javascript/thumkinJs.js"></script>
+    <script>
+      // function thanksMod(){
+      //   document.getElementById("thanks").style.opacity = i;
+      // }
+      // function thanksIn() {
+      //   for(i=0; i <= 1.0; i += 0.1){
+      //     window.setTimeout(thanksMod, 60)
+        
+      //   window.setTimeout(thanksOut, 500);
+      //   }
+      // }
+      // function thanksOut() {
+      //   for(i=1; i>=0; i -= 0.1){
+      //   document.getElementById("thanks").style.opacity = i;
+      //   }
+      // }
+    </script>
 
 </head>
 <body>
-	<!--<div class = "container">-->
 		<div class = "clearfix"></div>
-	<!--</div>-->
-<header>
-  <h1>thumkin</h1>
-  <h3>thumup the world.</h3>
-</header>
-<div id="plus"></div>
-<div id="minus"></div>
+<div id="plus" onclick='thumb(true); thanksIn()'></div>
+<div id="minus" onclick='thumb(false); thanksIn()'></div>
+<div id='thanks'>thumkin</div>
 <div id="map">
   <div id="clock"></div>
 	<div id="map-canvas">
