@@ -15,7 +15,7 @@ var auth = new FirebaseSimpleLogin(thumkinData, function(error, user) {
 });
 
 // OK now let's do a lil something
-var map, heatmapUp, heatmapDown, heatSlidePosUp;
+var map, heatmapUp, heatmapDown, heatSlideHour = 0;
 var thumbUpData = [],
   thumbDownData = [];
 var coords = "";
@@ -72,9 +72,9 @@ function haveThumkinData(snapshot) {
     //   .push({lb:taxiData[i].lb, mb:taxiData[i].mb, isUp:(Math.random() > 0.4),
     //     thumbTime:(new Date(dt.getTime()+(hourOffset*3600000))).toISOString()});
 
-    var thumb = {pt:new google.maps.LatLng(taxiData[i].lb, taxiData[i].mb),
-      isUp:taxiData[i].isUp,
-      thumbTime:taxiData[i].thumbTime};
+    var thumb = new google.maps.LatLng(taxiData[i].lb, taxiData[i].mb);
+      thumb.isUp = taxiData[i].isUp;
+      thumb.thumbTime = taxiData[i].thumbTime;
     if(taxiData[i].isUp)
       thumbUpData.push(thumb);
     else
@@ -187,23 +187,23 @@ function doMapBS(lat,lon){
   pointUpArray = new google.maps.MVCArray([]);
   pointDownArray = new google.maps.MVCArray([]);
 
-  // Set an initial set as the first 75
-  var num = 0;
-  for(var i in thumbUpData)
-  {
-    if(num++ == 50)
-      break;
-    pointUpArray.push(thumbUpData[i].pt);
-  }
- var num = 0;
-  for(var i in thumbDownData)
-  {
-    if(num++ == 50)
-      break;
-    pointDownArray.push(thumbDownData[i].pt);
-  }
-  heatSlidePosUp = 0;
-  heatSlidePosDown = 0;
+  // Set an initial set as the stuff from the last two hours
+ //  var num = 0;
+ //  for(var i in thumbUpData)
+ //  {
+ //    if(num++ == 50)
+ //      break;
+ //    pointUpArray.push(thumbUpData[i]);
+ //  }
+ // var num = 0;
+ //  for(var i in thumbDownData)
+ //  {
+ //    if(num++ == 50)
+ //      break;
+ //    pointDownArray.push(thumbDownData[i]);
+ //  }
+ //  heatSlidePosUp = 0;
+ //  heatSlidePosDown = 0;
 
 
   heatmapUp = new google.maps.visualization.HeatmapLayer({
@@ -266,48 +266,44 @@ function doMapBS(lat,lon){
   });
 
     // Seed the change
+    heatSlideHour = new Date().getHours();
     heatSlide();
 }
 
 
 function heatSlide(){
-    pointUpArray.removeAt(0);
-    pointUpArray.removeAt(0);
-    pointUpArray.removeAt(0);
-    pointUpArray.removeAt(0);
-    pointUpArray.removeAt(0);
-    pointUpArray.push(thumbUpData[(heatSlidePosUp++ + pointUpArray.length) %
-     thumbUpData.length].pt);
-    pointUpArray.push(thumbUpData[(heatSlidePosUp++ + pointUpArray.length) %
-     thumbUpData.length].pt);
-    pointUpArray.push(thumbUpData[(heatSlidePosUp++ + pointUpArray.length) %
-     thumbUpData.length].pt);
-    pointUpArray.push(thumbUpData[(heatSlidePosUp++ + pointUpArray.length) %
-     thumbUpData.length].pt);
-    pointUpArray.push(thumbUpData[(heatSlidePosUp++ + pointUpArray.length) %
-     thumbUpData.length].pt);
-    if (heatSlidePosUp >= taxiData.length)
-      heatSlidePosUp = 0;
+  // Remove the stale stuff from last hour
+    var lastHour = heatSlideHour - 1;
+    if(lastHour < 0)
+      lastHour = 23;
+    var lastHour2 = lastHour - 1;
+    if(lastHour2 < 0)
+      lastHour2 = 23;
 
-    pointDownArray.removeAt(0);
-    pointDownArray.removeAt(0);
-    pointDownArray.removeAt(0);
-    pointDownArray.removeAt(0);
-    pointDownArray.removeAt(0);
-    pointDownArray.push(thumbDownData[(heatSlidePosDown++ + pointDownArray.length) %
-     thumbDownData.length].pt);
-    pointDownArray.push(thumbDownData[(heatSlidePosDown++ + pointDownArray.length) %
-     thumbDownData.length].pt);
-    pointDownArray.push(thumbDownData[(heatSlidePosDown++ + pointDownArray.length) %
-     thumbDownData.length].pt);
-    pointDownArray.push(thumbDownData[(heatSlidePosDown++ + pointDownArray.length) %
-     thumbDownData.length].pt);
-    pointDownArray.push(thumbDownData[(heatSlidePosDown++ + pointDownArray.length) %
-     thumbDownData.length].pt);
-    if (heatSlidePosDown >= taxiData.length)
-      heatSlidePosDown = 0;
+    console.log(heatSlideHour, lastHour, lastHour2);
 
-    setTimeout(heatSlide, 120);
+    // Remove all the stuff from two hours ago
+    while(pointUpArray.length > 0 && new Date(pointUpArray.b[0].thumbTime).getHours() == lastHour2)
+        pointUpArray.removeAt(0);
+
+    while(pointDownArray.length > 0 && new Date(pointDownArray.b[0].thumbTime).getHours() == lastHour2)
+        pointDownArray.removeAt(0);
+
+    // Add shit from this hour
+    for(shit in thumbUpData)
+      if(new Date(thumbUpData[shit].thumbTime).getHours() == heatSlideHour)
+        pointUpArray.push(thumbUpData[shit]);
+
+    for(shit in thumbDownData)
+      if(new Date(thumbDownData[shit].thumbTime).getHours() == heatSlideHour)
+        pointDownArray.push(thumbUpData[shit]);
+
+    if(++heatSlideHour >= 24)
+      heatSlideHour = 0;
+
+    document.getElementById("clock").innerHTML = (heatSlideHour == 0 ? "12am" : (heatSlideHour == 12 ? "12pm" : (heatSlideHour < 12 ? heatSlideHour + "am" : (heatSlideHour-12) + "pm")));
+
+    setTimeout(heatSlide, 500);
 }
 
 var isDisableThumb = false;
