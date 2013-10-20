@@ -16,21 +16,20 @@
     </script>
     <script type="text/javascript" src="javascript/thumkinJs.js"></script>
     <script>
-      // function thanksMod(){
-      //   document.getElementById("thanks").style.opacity = i;
-      // }
-      // function thanksIn() {
-      //   for(i=0; i <= 1.0; i += 0.1){
-      //     window.setTimeout(thanksMod, 60)
-        
-      //   window.setTimeout(thanksOut, 500);
-      //   }
-      // }
-      // function thanksOut() {
-      //   for(i=1; i>=0; i -= 0.1){
-      //   document.getElementById("thanks").style.opacity = i;
-      //   }
-      // }
+      function thanksMod(){
+        document.getElementById("thanks").style.opacity = i;
+      }
+      function thanksIn() {
+        for(i=0; i <= 1.0; i += 0.1){
+          window.setTimeout(thanksMod, 600)
+        }
+        window.setTimeout(thanksOut, 1200);
+      }
+      function thanksOut() {
+        for(i=1; i>=0; i -= 0.1){   
+          window.setTimeout(thanksMod, 600)
+        }
+      }
     </script>
 
 </head>
