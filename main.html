@@ -2,14 +2,33 @@
 <html>
 <head>
 	<link rel="stylesheet" href="main.css">
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0 }
+      #map-canvas { height: 100% }
+    </style>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=visualization&key=AIzaSyBxL9E6d7IAD4v-y9y2Bm1dN_4x6kBcPU8&sensor=false">
+    </script>
+    <script type='text/javascript' src='https://cdn.firebase.com/v0/firebase.js'></script>
+    <script type="text/javascript" src="javascript/testData.js"></script>
+    <script type="text/javascript" src="javascript/thumkinJs.js"></script>
 </head>
 <body>
-	<div class = "container">
+	<!--<div class = "container">-->
 		<div class = "clearfix"></div>
-		<div id = "plus"></div>
-		<div id = "minus"></div>
-	</div>
-	<div id = "map"></div>
-	<div class = "background_over"></div>
+	<!--</div>-->
+
+<!-- <div id = "plus"></div>
+<div id = "minus"></div> -->
+<div id="map">
+	<div id="map-canvas"></div>
+</div>
+<div id = "plus_3_5"></div>
+<div id = "minus_3_5"></div>
+
+<div id = "plus_4"></div>
+<div id = "minus_4"></div>
+
 </body>
 <html>
