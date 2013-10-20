@@ -1,3 +1,7 @@
+//initialize Firebase
+var thumkinData = new Firebase('https://thumkin.firebaseio.com/');
+
+
 // OK now let's do a lil something
 var map, pointArray, heatmap, heatSlidePos;
 
