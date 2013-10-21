@@ -1,5 +1,6 @@
-//initialize Firebase
-var taxiData=[];
+// The guts of Thumkin
+
+// Initialize Firebase
 var thumkinData = new Firebase('https://thumkin2.firebaseio.com');
 
 var auth = new FirebaseSimpleLogin(thumkinData, function(error, user) {
@@ -40,6 +41,7 @@ function haveThumkinData(snapshot) {
   for(var i in taxiData)
   {
     ++num;
+    // Used to crank up data distributed differently across different hours
     // switch(num)
     // {
     //   case 20: // Noon
@@ -289,14 +291,14 @@ function heatSlide(){
     while(pointDownArray.length > 0 && new Date(pointDownArray.b[0].thumbTime).getHours() == lastHour2)
         pointDownArray.removeAt(0);
 
-    // Add shit from this hour
-    for(shit in thumbUpData)
-      if(new Date(thumbUpData[shit].thumbTime).getHours() == heatSlideHour)
-        pointUpArray.push(thumbUpData[shit]);
+    // Add thumbs from this hour
+    for(var thumb in thumbUpData)
+      if(new Date(thumbUpData[thumb].thumbTime).getHours() == heatSlideHour)
+        pointUpArray.push(thumbUpData[thumb]);
 
-    for(shit in thumbDownData)
-      if(new Date(thumbDownData[shit].thumbTime).getHours() == heatSlideHour)
-        pointDownArray.push(thumbUpData[shit]);
+    for(var thumb in thumbDownData)
+      if(new Date(thumbDownData[thumb].thumbTime).getHours() == heatSlideHour)
+        pointDownArray.push(thumbUpData[thumb]);
 
     if(++heatSlideHour >= 24)
       heatSlideHour = 0;
